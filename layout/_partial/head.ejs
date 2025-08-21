@@ -23,7 +23,7 @@
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%- favicon_tag(config.favicon) %>
-  <%- feed_tag(config.feed.path, {title: config.title}) %>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <%- open_graph({
     twitter_id: theme.twitter,
@@ -31,10 +31,13 @@
     fb_admins: theme.fb_admins, 
     fb_app_id: theme.fb_app_id}) %>
     
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-  <link href='//cdn.bootcss.com/node-waves/0.7.5/waves.min.css' rel='stylesheet'>
-  <%- css('style.css') %>
+<link href="https://fonts.googleapis.cn/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+<link href="https://fonts.googleapis.cn/css?family=Roboto+Mono" rel="stylesheet">
+<!-- ...existing code... -->
+  <link href='/waves.css' rel='stylesheet'>
+  <!-- <link rel="stylesheet" href="/css/style.css"> -->
+<!-- <script src="/js/less.js"></script> -->
+<link rel="stylesheet" href="/style.css">
   <script>
     function setLoadingBarProgress(num) {
       document.getElementById('loading-bar').style.width=num+"%";
