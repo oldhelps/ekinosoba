@@ -2005,3 +2005,42 @@ body {
   font-size: 14px;
   box-sizing: border-box;
 }
+.l_side {
+  width: 250px;
+  float: right;
+  margin-left: -250px;
+  position: relative;
+}
+
+.toc-wrapper {
+  position: relative;
+  top: 0;
+  right: 0;
+  margin: 0 0 20px 0;
+  max-height: none;
+  width: 100%;
+  z-index: 3;
+  padding: 20px;
+  border-left: 3px solid #4caf50;
+  background: #ffffff;
+  box-sizing: border-box;
+  transition: all 0.24s ease-out;
+  overflow: auto;
+}
+
+@media (max-width: 820px) {
+  .l_side {
+    width: 100%;
+    float: none;
+    margin: 20px 0 0;
+  }
+  .toc-wrapper {
+    width: 100%;
+    margin: 0 0 20px 0;
+    position: relative;
+    right: 0;
+    top: 0;
+    max-height: none;
+    transform: none !important;
+  }
+}
