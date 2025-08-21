@@ -25,3 +25,5 @@ Welcome everyone to join and contribute code!
 - 重写了 JS，不再使用 Jquery。
 
 欢迎大家加入并贡献代码！
+
+Ekinosoba:　駅の傍　 车站旁 Near the station
