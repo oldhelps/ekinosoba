@@ -15,6 +15,8 @@ search:
   azure_query_key:
   # baidu
   baidu_api_id:
+  engine: bing # google/baidu/bing
+  url: /search
 
 # friends link
 links:
@@ -61,3 +63,7 @@ social:
 #   url: https://twitter.com/your_twitter_username
 - slug: rss
 	url: /atom.xml
+
+
+# title image
+title_image: /img/title.jpg

@@ -18,7 +18,7 @@
 			</div>
 			<% if (theme.search.enable === true) { %>
 				<div class="m_search">
-					<form name="searchform" class="form u-search-form">
+					<form name="searchform" class="form u-search-form" action="<%=url_for(theme.search.url)%>" method="get" onsubmit="search(<%= theme.search.engine %>)">
 						<input type="text" class="input u-search-input" placeholder="Search" />
 						<span class="icon icon-search"></span>
 					</form>
