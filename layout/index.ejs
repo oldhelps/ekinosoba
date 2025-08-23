@@ -1,31 +1,34 @@
-<div class="hero" style="background-image: url('https://s2.loli.net/2025/08/09/RMeXpfw2sScFuUO.jpg');">
-    <div class="hero-content">
-        <h1 class="hero-title">Welcome to My Blog</h1>
-        <p class="hero-subtitle">Thoughts, stories and ideas.</p>
-    </div>
-</div>
-<div class="post-list">
-    <% site.posts.forEach(function(post){ %>
-        <article class="post-item card">
-            <h2 class="post-title">
-                <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-            </h2>
-            <div class="post-meta">
-                <time datetime="<%= post.date.toJSON() %>">
-                    <%= date(post.date, 'YYYY-MM-DD') %>
-                </time>
-            </div>
-            <div class="post-excerpt">
-                <% if(post.description){ %>
-                    <%= post.description %>
-                <% } else if(post.excerpt && post.excerpt.length > 0){ %>
-                    <%- post.excerpt.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
-                <% } else if(post.content && post.content.length > 0){ %>
-                    <%- post.content.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
-                <% } else { %>
-                    暂无摘要
-                <% } %>
-            </div>
-        </article>
-    <% }) %>
-</div>
+<% if (theme.hero_title && theme.hero_subtitle) { %>
+  <div class="hero" style="background-image: url(<%= theme.hero_image %>);">
+
+      <div class="hero-content">
+          <h1 class="hero-title"><%= theme.hero_title %></h1>
+
+          <p class="hero-subtitle"><%= theme.hero_subtitle %></p>
+      </div>
+  </div><% } %>
+  <div class="post-list">
+      <% site.posts.forEach(function(post){ %>
+          <article class="post-item card">
+              <h2 class="post-title">
+                  <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+              </h2>
+              <div class="post-meta">
+                  <time datetime="<%= post.date.toJSON() %>">
+                      <%= date(post.date, 'YYYY-MM-DD') %>
+                  </time>
+              </div>
+              <div class="post-excerpt">
+                  <% if(post.description){ %>
+                      <%= post.description %>
+                  <% } else if(post.excerpt && post.excerpt.length > 0){ %>
+                      <%- post.excerpt.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
+                  <% } else if(post.content && post.content.length > 0){ %>
+                      <%- post.content.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
+                  <% } else { %>
+                      暂无摘要
+                  <% } %>
+              </div>
+          </article>
+      <% }) %>
+  </div>
