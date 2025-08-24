@@ -10,24 +10,29 @@
   <div class="post-list">
       <% site.posts.forEach(function(post){ %>
           <article class="post-item card">
-              <h2 class="post-title">
-                  <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-              </h2>
-              <div class="post-meta">
-                  <time datetime="<%= post.date.toJSON() %>">
-                      <%= date(post.date, 'YYYY-MM-DD') %>
-                  </time>
-              </div>
-              <div class="post-excerpt">
-                  <% if(post.description){ %>
-                      <%= post.description %>
-                  <% } else if(post.excerpt && post.excerpt.length > 0){ %>
-                      <%- post.excerpt.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
-                  <% } else if(post.content && post.content.length > 0){ %>
-                      <%- post.content.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
-                  <% } else { %>
-                      暂无摘要
-                  <% } %>
+              <% if(post.thumbnail){ %>
+                  <img class="post-thumbnail" src="<%= post.thumbnail %>">
+              <% } %>
+              <div class="post-content">
+                  <h2 class="post-title">
+                      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+                  </h2>
+                  <div class="post-meta">
+                      <time datetime="<%= post.date.toJSON() %>">
+                          <%= date(post.date, 'YYYY-MM-DD') %>
+                      </time>
+                  </div>
+                  <div class="post-excerpt">
+                      <% if(post.description){ %>
+                          <%= post.description %>
+                      <% } else if(post.excerpt && post.excerpt.length > 0){ %>
+                          <%- post.excerpt.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
+                      <% } else if(post.content && post.content.length > 0){ %>
+                          <%- post.content.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
+                      <% } else { %>
+                          暂无摘要
+                      <% } %>
+                  </div>
               </div>
           </article>
       <% }) %>
