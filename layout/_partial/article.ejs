@@ -42,9 +42,10 @@
 		</div>
 	<%} %>
 	</section>
-	<% if (post.comments && config.disqus_shortname){ %>
+	<% if (post.comments && theme.comments.enable&&theme.comments.code){ %>
+
 		<section id="comments">
-			<div id="disqus_thread"></div>
+			<%- theme.comments.code %>
 		</section>
 	<% } %>
 </script>
