@@ -1,22 +1,7 @@
 # Search
 search: 
   enable: true
-  service: hexo # google/hexo/algolia/azure/baidu
-  # google 
-  google_api_key:
-  google_engine_id:
-  # algolia
-  algolia_app_id:
-  algolia_api_key:
-  algolia_index_name:
-  # azure
-  azure_service_name:
-  azure_index_name:
-  azure_query_key:
-  # baidu
-  baidu_api_id:
-  engine: bing # google/baidu/bing
-  url: /search
+  service: bing # baidu, google, bing, so, yahoo, duckduckgo, sougou
 
 # friends link
 links:
@@ -79,3 +64,8 @@ author:
 comments:
   enable: false
   code: 	 # your <script> tag
+
+seo: #meta tags for SEO
+  description: 老帮帮的博客
+  keywords: [老帮帮, 博客, 技术, 分享]
+  author: 老帮帮

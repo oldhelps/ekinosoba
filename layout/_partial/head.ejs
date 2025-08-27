@@ -18,8 +18,9 @@
       title = 'Tag: ' + page.tag;
   %>
   <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
-  <meta name="description" content="<%= config.description %>" />
-  <meta name="keywords" content="<%=(config.keywords||[]).join(',') %>" />
+  <meta name="description" content="<%= theme.seo.description %>" />
+  <meta name="keywords" content="<%=(theme.seo.keywords||[]).join(',') %>" />
+  <meta name="author" content="<%= theme.seo.author %>" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%- favicon_tag(config.favicon) %>
@@ -35,7 +36,7 @@
 <link href="https://fonts.googleapis.cn/css?family=Roboto+Mono" rel="stylesheet">
 <!-- ...existing code... -->
   <link href='/waves.css' rel='stylesheet'>
-  <!-- <script src="/js/searchEngine.js"></script> -->
+
    <script src="/js/mobile-menu.js"></script>
   <!-- <link rel="stylesheet" href="/css/style.css"> -->
 <!-- <script src="/js/less.js"></script> -->
