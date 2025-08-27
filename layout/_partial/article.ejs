@@ -2,7 +2,11 @@
   class="post white-box article-type-<%= post.layout %>"
   itemscope itemprop="blogPost">
 	<section class='meta'>
-	<h2 class="title">
+    <% if(post.thumbnail){ %>
+        <img class="article-thumbnail" src="<%- url_for(post.thumbnail) %>" alt="<%= post.title %>">
+
+    <% } %>
+    <h2 class="title">
   	<a href="<%- url_for(post.path) %>">
     	<%= post.title %>
     </a>
