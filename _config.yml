@@ -69,3 +69,11 @@ seo: #meta tags for SEO
   description: 老帮帮的博客
   keywords: [老帮帮, 博客, 技术, 分享]
   author: 老帮帮
+
+
+clarity: # Microsoft Clarity
+  enable: false
+  code: '' # your clarity code
+
+busuanzi: # 文章阅读量统计
+  enable: true
