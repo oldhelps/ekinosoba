@@ -38,6 +38,7 @@ widgets:
   - links
   - categories
   - tagcloud
+  - busuanzi
 
 
 # use url, not username
