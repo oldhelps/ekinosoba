@@ -77,3 +77,5 @@ clarity: # Microsoft Clarity
 
 busuanzi: # 文章阅读量统计
   enable: true
+  script: '//api.busuanzi.cc/static/3.6.9/busuanzi.min.js' # default script, you can custom it
+
