@@ -10,7 +10,9 @@
     <!-- 抽屉栏头部 -->
     <div class="drawer-header">
         <mdui-avatar src="<%-config.icon %>"></mdui-avatar>
-        <h3 class="drawer-title"><%= config.title %></h3>
+        
+        <h3 class="drawer-title"><%-config.author %></h3>
+        <p><%= theme.author.bio%></p>
         <p class="drawer-subtitle"><%= config.subtitle || 'Blog Navigation' %></p>
     </div>
     
