@@ -19,12 +19,14 @@
                 <% if(post.excerpt){ %>
                     <%- post.excerpt %>
                 <% } else { %>
-                    <%  let excerpt = truncate(post.content, {length: 200}) 
-                        //判断是否以`="`或者`=`结尾，如果是，去掉,否则直接输出
-                        if(excerpt.slice(-2) == '="' || excerpt.slice(-2) == '='){
-                            excerpt = excerpt.slice(0, -2);
-                        }
-                 
+                    <%  
+                    let excerpt = truncate(post.content, {length: 200});
+                    // 清理HTML标签，防止未闭合标签破坏页面结构
+                    excerpt = excerpt.replace(/<[^>]*>?/gm, '');
+                    // 判断是否以`="`或者`=`结尾，如果是，去掉,否则直接输出
+                    if(excerpt.slice(-2) == '="' || excerpt.slice(-2) == '='){
+                        excerpt = excerpt.slice(0, -2);
+                    }
                     %>
                     <%- excerpt %>
                 <% } %>
@@ -51,4 +53,3 @@
         </mdui-card>
     </article>
 </div></div>
-
