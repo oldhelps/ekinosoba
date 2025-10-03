@@ -1,0 +1,50 @@
+code{
+    font-family: 'Lucida Console','Courier New', Courier, monospace !important;
+}
+
+p>code{
+    border: 1px solid #e1e4e8;
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+}
+
+/* 代码块复制按钮样式 */
+.code-block-wrapper {
+    position: relative;
+    margin: 1em 0;
+}
+
+.code-block-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding: 0.5em;
+}
+
+.copy-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-button:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.copy-button i.material-icons {
+    font-size: 16px;
+}
+
+pre {
+    position: relative;
+    padding-top: 2.5em;
+}
+@import url('/post.css');

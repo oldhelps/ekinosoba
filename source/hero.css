@@ -1,0 +1,201 @@
+/* Hero组件样式 - 遵循MD3设计语言 */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* 背景图片遮罩 */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* 内容容器 */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 24px;
+    margin: 0 auto;
+}
+
+/* 主标题样式 */
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 16px 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+}
+
+/* 副标题样式 */
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0 0 48px 0;
+    opacity: 0.9;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 按钮容器 */
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+}
+
+/* 按钮样式 */
+.hero-button {
+    min-width: 140px;
+    height: 48px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 填充按钮样式 */
+.hero-button[variant="filled"] {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1976d2;
+    border: none;
+}
+
+.hero-button[variant="filled"]:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 轮廓按钮样式 */
+.hero-button[variant="outlined"] {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.hero-button[variant="outlined"]:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 按钮图标样式 */
+.hero-button mdui-icon {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 80vh;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 24px;
+    }
+    
+    .hero-content {
+        padding: 0 16px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+    }
+    
+    .hero-button {
+        min-width: 160px;
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+    
+    .hero-buttons {
+        gap: 8px;
+        margin-top: 20px;
+    }
+    
+    .hero-button {
+        min-width: 140px;
+        height: 44px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .hero::before {
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .hero-button[variant="filled"] {
+        background: rgba(255, 255, 255, 0.95);
+        color: #1976d2;
+    }
+    
+    .hero-button[variant="filled"]:hover {
+        background: rgba(255, 255, 255, 1);
+    }
+}
+
+/* 加载动画 */
+.hero-content {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

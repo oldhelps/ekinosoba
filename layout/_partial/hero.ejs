@@ -1,0 +1,107 @@
+<!-- Hero组件 -->
+<div class="hero" style="background-image: url('<%= theme.hero_image  %>')">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <%= theme.hero_title || '老帮帮的博客' %>
+        </h1>
+        <p class="hero-subtitle">
+            <%= theme.hero_subtitle || '老帮帮的博客。' %>
+        </p>
+        
+        <!-- 按钮容器 -->
+        <div class="hero-buttons">
+            <mdui-button variant="filled" class="hero-button" onclick="scrollToContent()">
+                <mdui-icon name="expand_more"></mdui-icon>
+                开始探索
+            </mdui-button>
+            <mdui-button variant="outlined" class="hero-button" onclick="scrollToLatestPost()">
+                <mdui-icon name="article"></mdui-icon>
+                最新文章
+            </mdui-button>
+        </div>
+    </div>
+</div>
+
+<script>
+// 滚动到内容区域
+function scrollToContent() {
+    const content = document.querySelector('.body');
+    if (content) {
+        content.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// 滚动到最新文章
+function scrollToLatestPost() {
+    const firstPost = document.querySelector('.post-item');
+    if (firstPost) {
+        firstPost.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+        });
+    } else {
+        scrollToContent();
+    }
+}
+
+// 按钮点击动画效果
+function addButtonAnimations() {
+    const buttons = document.querySelectorAll('.hero-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // 添加点击效果
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+        
+        // 悬停效果
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '';
+        });
+    });
+}
+
+// 键盘导航支持
+document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+        case 'ArrowDown':
+        case ' ':
+            e.preventDefault();
+            scrollToContent();
+            break;
+        case 'Enter':
+            if (document.activeElement.classList.contains('hero-button')) {
+                e.preventDefault();
+                document.activeElement.click();
+            }
+            break;
+    }
+});
+
+// 页面加载完成后初始化
+document.addEventListener('DOMContentLoaded', function() {
+    addButtonAnimations();
+    
+    // 自动聚焦到第一个按钮以便键盘导航
+    const firstButton = document.querySelector('.hero-button');
+    if (firstButton) {
+        firstButton.setAttribute('tabindex', '0');
+    }
+});
+
+// 触摸设备优化
+if ('ontouchstart' in window) {
+    document.addEventListener('touchstart', function() {}, {passive: true});
+}
+</script>

@@ -1,0 +1,159 @@
+<!-- 侧边导航抽屉栏 -->
+<mdui-navigation-drawer 
+    id="navigationDrawer" 
+    modal 
+    close-on-esc 
+    close-on-overlay-click
+    placement="left"
+    class="navigation-drawer">
+    
+    <!-- 抽屉栏头部 -->
+    <div class="drawer-header">
+        <mdui-avatar src="<%-config.icon %>"></mdui-avatar>
+        <h3 class="drawer-title"><%= config.title %></h3>
+        <p class="drawer-subtitle"><%= config.subtitle || 'Blog Navigation' %></p>
+    </div>
+    
+    <mdui-divider class="drawer-divider"></mdui-divider>
+    
+    <!-- 导航菜单 -->
+    <mdui-list class="drawer-menu">
+        <mdui-list-item 
+            href="/" 
+            icon="home" 
+            end-icon="chevron_right"
+            class="menu-item">
+            Home
+        </mdui-list-item>
+        
+        <mdui-list-item 
+            href="/archives/" 
+            icon="archive" 
+            end-icon="chevron_right"
+            class="menu-item">
+            Archives
+        </mdui-list-item>
+        
+        <mdui-list-item 
+            href="/tags/" 
+            icon="tag" 
+            end-icon="chevron_right"
+            class="menu-item">
+            Tags
+        </mdui-list-item>
+        
+        <mdui-list-item 
+            href="/about/" 
+            icon="info" 
+            end-icon="chevron_right"
+            class="menu-item">
+            About   
+        </mdui-list-item>
+    </mdui-list>
+    
+    <mdui-divider class="drawer-divider"></mdui-divider>
+    
+    <!-- 友情链接 -->
+    <% if (theme.links && theme.links.length) { %>
+        <mdui-list class="drawer-links">
+            <mdui-list-subheader>Friend Links</mdui-list-subheader>
+            <% theme.links.forEach(function(link) { %>
+                <mdui-list-item 
+                    href="<%= link.url %>" 
+                    target="_blank"
+                    end-icon="open_in_new"
+                    class="link-item">
+                    <%= link.name %>
+                </mdui-list-item>
+            <% }); %>
+        </mdui-list>
+        
+        <mdui-divider class="drawer-divider"></mdui-divider>
+    <% } %>
+    
+    <!-- 分类列表 -->
+    <mdui-list class="drawer-categories">
+        <mdui-list-subheader>Categories</mdui-list-subheader>
+        <% if (site.categories && site.categories.length) { %>
+            <% site.categories.sort('name').forEach(function(category) { %>
+                <mdui-list-item 
+                    href="<%= url_for(category.path) %>" 
+                    end-icon="chevron_right"
+                    class="category-item">
+                    <%= category.name %>
+                    <mdui-chip slot="end-icon" variant="tonal"><%= category.length %></mdui-chip>
+                </mdui-list-item>
+            <% }); %>
+        <% } else { %>
+            <mdui-list-item>No categories</mdui-list-item>
+        <% } %>
+    </mdui-list>
+    
+    <mdui-divider class="drawer-divider"></mdui-divider>
+    
+    <!-- 标签列表 -->
+    <mdui-list class="drawer-tags">
+        <mdui-list-subheader>Tags</mdui-list-subheader>
+        <% if (site.tags && site.tags.length) { %>
+            <% site.tags.sort('name').forEach(function(tag) { %>
+                <mdui-list-item 
+                    href="<%= url_for(tag.path) %>" 
+                    end-icon="chevron_right"
+                    class="tag-item">
+                    <%= tag.name %>
+                    <mdui-chip slot="end-icon" variant="tonal"><%= tag.length %></mdui-chip>
+                </mdui-list-item>
+            <% }); %>
+        <% } else { %>
+            <mdui-list-item>No tags</mdui-list-item>
+        <% } %>
+    </mdui-list>
+    
+    <mdui-divider class="drawer-divider"></mdui-divider>
+    
+    <!-- 不蒜子统计 -->
+    <% if (theme.busuanzi && theme.busuanzi.enable) { %>
+        <mdui-list class="drawer-stats">
+            <mdui-list-subheader>Site Statistics</mdui-list-subheader>
+            <mdui-list-item>
+                <span>Site Visits: </span>
+                <span id="busuanzi_site_pv" class="busuanzi-stat">Loading...</span>
+            </mdui-list-item>
+            <mdui-list-item>
+                <span>Site Visitors: </span>
+                <span id="busuanzi_site_uv" class="busuanzi-stat">Loading...</span>
+            </mdui-list-item>
+            <mdui-list-item>
+                <span>Page Reads: </span>
+                <span id="busuanzi_page_pv" class="busuanzi-stat">Loading...</span>
+            </mdui-list-item>
+            <mdui-list-item>
+                <span>Page Visitors: </span>
+                <span id="busuanzi_page_uv" class="busuanzi-stat">Loading...</span>
+            </mdui-list-item>
+        </mdui-list>
+        
+        <mdui-divider class="drawer-divider"></mdui-divider>
+    <% } %>
+    
+    <!-- 抽屉栏底部 -->
+    <div class="drawer-footer">
+        <mdui-button 
+            variant="outlined" 
+            class="close-drawer-btn">
+            <mdui-icon slot="start-icon">close</mdui-icon>
+            Close Menu
+        </mdui-button>
+    </div>
+</mdui-navigation-drawer>
+
+<!-- 引入外部CSS文件 -->
+<link href="/navigation-drawer.css" rel="stylesheet">
+
+<!-- 引入外部JavaScript文件 -->
+<script type="module" src="/navigation-drawer.js"></script>
+
+<!-- 不蒜子统计脚本 -->
+<% if (theme.busuanzi && theme.busuanzi.enable) { %>
+    <script src="<%= theme.busuanzi.script %>" defer></script>
+<% } %>

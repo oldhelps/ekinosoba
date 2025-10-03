@@ -1,0 +1,38 @@
+<div class="hero" style="background-image: url('<%= url_for(page.thumbnail || theme.hero_image) %>')">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <%= page.title %>
+        </h1>
+        <p class="hero-subtitle">
+            <%  let excerpt =page.excerpt ||  truncate(page.content, {length: 200}) 
+                        //判断是否以`="`或者`=`结尾，如果是，去掉,否则直接输出
+                        if(excerpt.slice(-2) == '="' || excerpt.slice(-2) == '='){
+                            excerpt = excerpt.slice(0, -2);
+                        }
+                  %>
+                  <%= excerpt %>
+        </p>
+        <div class="post-meta">
+                <time datetime="<%= page.date.toISOString() %>"><%= page.date.format('YYYY-MM-DD') %></time>
+                <% if (page.categories && page.categories.length) { %>
+                    <div class="categories">
+                        <% page.categories.each(function(category) { %>
+                            <mdui-chip variant="filter" href="<%= url_for(category.path) %>"><%= category.name %></mdui-chip>
+                        <% }); %>
+                    </div>
+                <% } %>
+                <% if (page.tags && page.tags.length) { %>
+                    <div class="tags">
+                        <% page.tags.each(function(tag) { %>
+                            <mdui-chip variant="input" href="<%= url_for(tag.path) %>"><%= tag.name %></mdui-chip>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+            
+        <!-- 按钮容器 -->
+    </div>
+</div>
+<style>
+    @import url('/hero.css');
+</style>

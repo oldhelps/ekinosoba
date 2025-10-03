@@ -1,0 +1,71 @@
+/* 侧边导航抽屉栏样式 */
+.navigation-drawer {
+    --mdui-navigation-drawer-width: 280px;
+    --mdui-navigation-drawer-background-color: var(--mdui-color-surface);
+    --mdui-navigation-drawer-color: var(--mdui-color-on-surface);
+}
+
+.drawer-header {
+    padding: 24px 20px 16px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--mdui-color-primary-container) 0%, var(--mdui-color-surface-variant) 100%);
+}
+
+.drawer-icon {
+    font-size: 48px;
+    color: var(--mdui-color-primary);
+    margin-bottom: 16px;
+}
+
+.drawer-title {
+    color: var(--mdui-color-on-surface);
+    margin: 0 0 8px 0;
+}
+
+.drawer-subtitle {
+    color: var(--mdui-color-on-surface-variant);
+    margin: 0;
+    font-size: 14px;
+}
+
+.drawer-divider {
+    margin: 16px 0;
+}
+
+.drawer-menu {
+    padding: 8px 0;
+}
+
+.menu-item {
+    --mdui-list-item-height: 48px;
+    --mdui-list-item-padding: 0 16px;
+    --mdui-list-item-color: var(--mdui-color-on-surface-variant);
+    --mdui-list-item-hover-color: var(--mdui-color-primary);
+    --mdui-list-item-hover-background-color: var(--mdui-color-primary-container);
+}
+
+.menu-item:hover {
+    --mdui-list-item-color: var(--mdui-color-primary);
+}
+
+.drawer-footer {
+    padding: 16px 20px 24px;
+}
+
+.close-drawer-btn {
+    width: 100%;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navigation-drawer {
+        --mdui-navigation-drawer-width: 100vw;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .drawer-header {
+        background: linear-gradient(135deg, var(--mdui-color-surface-container) 0%, var(--mdui-color-surface-variant) 100%);
+    }
+}

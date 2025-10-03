@@ -1,0 +1,53 @@
+table {
+    /* 表格只在每行的底部和每列中间加一层虚线边框，不同行使用不同颜色 */
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+/* 为表格单元格添加基本样式 */
+table td, table th {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+/* 为表格行添加底部虚线边框 */
+table tbody tr {
+    border-bottom: 1px dashed #ccc;
+}
+
+/* 为奇数行设置一种颜色 */
+table tbody tr:nth-child(odd) {
+    background-color: #f8f8f8;
+    border-bottom-color: #bbb;
+}
+
+/* 为偶数行设置另一种颜色 */
+table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+    border-bottom-color: #ddd;
+}
+
+/* 为表头设置特殊样式 */
+table thead tr {
+    background-color: #e9e9e9;
+    border-bottom: 2px solid #999;
+}
+
+/* 在每列中间添加虚线边框 */
+table td:not(:last-child),
+table th:not(:last-child) {
+    border-right: 1px dashed #ccc;
+}
+
+/* 为奇数列添加不同的边框颜色 */
+table td:nth-child(odd):not(:last-child),
+table th:nth-child(odd):not(:last-child) {
+    border-right-color: #bbb;
+}
+
+/* 为偶数列添加不同的边框颜色 */
+table td:nth-child(even):not(:last-child),
+table th:nth-child(even):not(:last-child) {
+    border-right-color: #ddd;
+}

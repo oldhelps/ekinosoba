@@ -1,0 +1,245 @@
+/* 文章卡片响应式布局样式 - 兼容mdui组件 */
+
+.post-list {
+    display: grid;
+    gap: 24px;
+    padding: 24px 0;
+}
+
+.post-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.post-item:hover {
+    transform: translateY(-4px);
+}
+
+.post-item mdui-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.post-item h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    padding: 0 16px;
+}
+
+.post-item h2 a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post-item h2 a:hover {
+    color: #3498db;
+}
+
+.post-meta {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    padding: 0 16px;
+}
+
+.post-meta time {
+    color: #95a5a6;
+}
+
+.post-excerpt {
+    color: #5a6c7d;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    padding: 0 16px 16px;
+    flex: 1;
+}
+
+.post-excerpt mdui-button {
+    margin-top: 12px;
+}
+
+/* 表格样式 */
+.post-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #0c0c0c;
+}
+
+.post-content table td,
+.post-content table th {
+    padding: 8px;
+    border: 1px solid #0c0c0c;
+}
+
+
+
+.post-content table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.post-content table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.post-content table thead {
+    background-color: #e9ecef;
+}
+
+.post-content table thead th {
+    font-weight: bold;
+    text-align: left;
+}
+
+/* 移动端样式 - 一行1个 */
+@media (max-width: 768px) {
+    .post-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .post-thumbnail {
+        height: 180px;
+    }
+    
+    .post-item h2 {
+        font-size: 1.1rem;
+        padding: 0 12px;
+    }
+    
+    .post-meta {
+        padding: 0 12px;
+    }
+    
+    .post-excerpt {
+        padding: 0 12px 12px;
+    }
+}
+
+/* 平板端样式 - 一行2个 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .post-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .post-thumbnail {
+        height: 180px;
+    }
+}
+
+/* 桌面端样式 - 一行2个 */
+@media (min-width: 1025px) {
+    .post-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .post-thumbnail {
+        height: 200px;
+    }
+}
+
+/* 大桌面端样式 - 一行3个 */
+@media (min-width: 1440px) {
+    .post-list {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1400px;
+    }
+    
+    .post-thumbnail {
+        height: 220px;
+    }
+}
+
+/* 确保图片在卡片内显示完整 */
+.post-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 卡片内元素间距优化 */
+.post-item > * {
+    margin: 0;
+}
+
+/* 卡片标题截断处理 */
+.post-item h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 摘要文本截断处理 */
+.post-excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 加载动画 */
+.post-item {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 卡片悬停效果增强 */
+.post-item:hover mdui-card {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 确保卡片高度一致 */
+.post-item mdui-card {
+    min-height: 300px;
+}
+
+/* 移动端卡片高度调整 */
+@media (max-width: 768px) {
+    .post-item mdui-card {
+        min-height: 280px;
+    }
+}
+
+/* 大屏幕卡片高度调整 */
+@media (min-width: 1440px) {
+    .post-item mdui-card {
+        min-height: 320px;
+    }
+}
+/* 占位卡片样式 */
+.placeholder-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+}

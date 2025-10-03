@@ -1,0 +1,17 @@
+:root{
+    --mdui-color-primary: #1976d2;
+    --mdui-color-on-primary: #ffffff;
+    --mdui-color-primary-container: #e8eaf6;
+    --mdui-color-on-primary-container: #1a1a1a;
+}
+.read-more-button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #106cc9 !important;
+    color: #ffffff !important;
+}
+/* mdui-top-app-bar:not(:defined),
+mdui-button-icon:not(:defined),
+mdui-divider:not(:defined) {
+  visibility: hidden;
+} */

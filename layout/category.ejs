@@ -1,1 +1,61 @@
-<%- partial('_partial/archive') %>
+<div class="body">
+  <h1>Category: <%= page.category %></h1>
+  <div class="post-list">
+    <% page.posts.forEach(function(post){ %>
+      <article class="post-item">
+        <mdui-card variant="elevated">
+          <% if(post.thumbnail){ %>
+            <img src="<%- post.thumbnail %>" alt="<%= post.title %>" class="post-thumbnail">
+          <% } %>
+          <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2> 
+          <div class="post-meta">
+            <time datetime="<%= post.date.toJSON() %>">
+              <%= date(post.date, 'YYYY-MM-DD') %>
+            </time>
+          </div>
+          <mdui-divider></mdui-divider>
+          <div class="post-excerpt">
+            <% if(post.excerpt){ %>
+              <%- post.excerpt %>
+            <% } else { %>
+              <%  let excerpt = truncate(post.content, {length: 200}) 
+                  //判断是否以`="`或者`=`结尾，如果是，去掉,否则直接输出
+                  if(excerpt.slice(-2) == '="' || excerpt.slice(-2) == '='){
+                      excerpt = excerpt.slice(0, -2);
+                  }
+              %>
+              <%- excerpt %>
+            <% } %>
+          </div>
+          <mdui-divider></mdui-divider>
+          <a href="<%- url_for(post.path) %>" style="text-decoration: none;">
+            <mdui-button end-icon="arrow_forward" class="read-more-button" variant="filled">Read More</mdui-button>
+          </a>
+        </mdui-card>
+      </article>
+    <% }) %>
+  </div>
+  
+  <!-- 分页器 -->
+  <% if (page.total > 1) { %>
+    <nav class="page-nav" style="text-align: center; margin: 2rem 0;">
+      <% if (page.prev) { %>
+        <a href="<%= url_for(page.prev_link) %>" class="prev" style="margin-right: 1rem;">
+          <mdui-button variant="outlined">上一页</mdui-button>
+        </a>
+      <% } %>
+      
+      <span class="page-number" style="margin: 0 1rem;">
+        第 <%= page.current %> 页，共 <%= page.total %> 页
+      </span>
+      
+      <% if (page.next) { %>
+        <a href="<%= url_for(page.next_link) %>" class="next" style="margin-left: 1rem;">
+          <mdui-button variant="outlined">下一页</mdui-button>
+        </a>
+      <% } %>
+    </nav>
+  <% } %>
+</div>
+
+<link rel="stylesheet" href="<%- url_for('/css/archive.css') %>">

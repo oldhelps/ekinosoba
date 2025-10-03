@@ -1,39 +1,54 @@
-<% if (theme.hero_title && theme.hero_subtitle) { %>
-  <div class="hero" style="background-image: url(<%= theme.hero_image %>);">
+<div class="body">
+<%- partial('_partial/hero') %>
+<div class="post-list">
+    <% site.posts.slice(0, 5).forEach(function(post){ %>
+        <article class="post-item">
+            <mdui-card variant="elevated">
+                <% if(post.thumbnail){ %>
+                    <img src="<%- post.thumbnail %>" alt="<%= post.title %>" class="post-thumbnail">
+                <% } %>
+            <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2> 
+             <div class="post-meta">
+                <time datetime="<%= post.date.toJSON() %>">
+                    <%= date(post.date, 'YYYY-MM-DD') %>
+                </time>
+            </div>
+            <mdui-divider></mdui-divider>
+          
+            <div class="post-excerpt">
+                <% if(post.excerpt){ %>
+                    <%- post.excerpt %>
+                <% } else { %>
+                    <%  let excerpt = truncate(post.content, {length: 200}) 
+                        //判断是否以`="`或者`=`结尾，如果是，去掉,否则直接输出
+                        if(excerpt.slice(-2) == '="' || excerpt.slice(-2) == '='){
+                            excerpt = excerpt.slice(0, -2);
+                        }
+                 
+                    %>
+                    <%- excerpt %>
+                <% } %>
+            </div>
+             <mdui-divider></mdui-divider>
+              <a href="<%- url_for(post.path) %>" style="text-decoration: none;">
+                <mdui-button end-icon="arrow_forward" class="read-more-button" variant="filled">Read More</mdui-button>
+              </a>
+        </article>
+    </mdui-card>
+    <% }) %>
+    
+    <!-- 第六个位置预留卡片 -->
+    <article class="post-item">
+        <mdui-card variant="elevated" class="placeholder-card">
+          <h2>More Posts</h2> 
+          <mdui-divider></mdui-divider>
+          <p>To view more posts, please click the button below to go to the archive page.</p>
+          <mdui-divider></mdui-divider>
+          <a href="<%- url_for('/archives') %>" style="text-decoration: none;">
+            <mdui-button end-icon="arrow_forward" class="read-more-button placeholder-button" variant="filled">View More</mdui-button>
+          </a>
+        </mdui-card>
+        </mdui-card>
+    </article>
+</div></div>
 
-      <div class="hero-content">
-          <h1 class="hero-title"><%= theme.hero_title %></h1>
-
-          <p class="hero-subtitle"><%= theme.hero_subtitle %></p>
-      </div>
-  </div><% } %>
-  <div class="post-list">
-      <% site.posts.forEach(function(post){ %>
-          <article class="post-item card">
-              <% if(post.thumbnail){ %>
-                  <img class="post-thumbnail" src="<%= post.thumbnail %>">
-              <% } %>
-              <div class="post-content">
-                  <h2 class="post-title">
-                      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
-                  </h2>
-                  <div class="post-meta">
-                      <time datetime="<%= post.date.toJSON() %>">
-                          <%= date(post.date, 'YYYY-MM-DD') %>
-                      </time>
-                  </div>
-                  <div class="post-excerpt">
-                      <% if(post.description){ %>
-                          <%= post.description %>
-                      <% } else if(post.excerpt && post.excerpt.length > 0){ %>
-                          <%- post.excerpt.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
-                      <% } else if(post.content && post.content.length > 0){ %>
-                          <%- post.content.replace(/(<([^>]+)>)/ig,"").slice(0,300) %>...
-                      <% } else { %>
-                          暂无摘要
-                      <% } %>
-                  </div>
-              </div>
-          </article>
-      <% }) %>
-  </div>

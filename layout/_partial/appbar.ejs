@@ -1,0 +1,12 @@
+<div style="position: relative;overflow: hidden">
+  <mdui-top-app-bar
+    scroll-behavior="elevate"
+    scroll-target=".body"
+  >
+    <mdui-button-icon icon="menu" id="menuButton"></mdui-button-icon>
+    <mdui-top-app-bar-title><%= config.title %></mdui-top-app-bar-title>
+    <div style="flex-grow: 1"></div>
+    </mdui-top-app-bar>
+  
+  <!-- 引入侧边导航抽屉栏 -->
+  <%- partial('_partial/navigation-drawer') %>

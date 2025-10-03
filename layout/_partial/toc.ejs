@@ -1,0 +1,278 @@
+<!-- 文章目录组件 -->
+<div id="toc-container" class="toc-container">
+    <mdui-card variant="elevated" class="toc-card">
+        <div class="toc-header">
+            <mdui-icon class="toc-icon">list</mdui-icon>
+            <h3 class="toc-title">文章目录</h3>
+        </div>
+        <mdui-divider class="toc-divider"></mdui-divider>
+        <nav id="toc-nav" class="toc-nav">
+            <!-- 目录内容将通过JavaScript动态生成 -->
+            <div class="toc-loading">
+                <mdui-circular-progress indeterminate></mdui-circular-progress>
+                <span>正在生成目录...</span>
+            </div>
+        </nav>
+    </mdui-card>
+</div>
+
+<!-- 目录样式 -->
+<style>
+.toc-container {
+    position: sticky;
+    top: 80px;
+    margin-bottom: 24px;
+    z-index: 10;
+}
+
+.toc-card {
+    --mdui-card-background-color: var(--mdui-color-surface-container-lowest);
+    --mdui-card-color: var(--mdui-color-on-surface);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.toc-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px 12px;
+}
+
+.toc-icon {
+    font-size: 24px;
+    color: var(--mdui-color-primary);
+    margin-right: 12px;
+}
+
+.toc-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--mdui-color-on-surface);
+}
+
+.toc-divider {
+    margin: 0 16px;
+}
+
+.toc-nav {
+    padding: 8px 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-item {
+    margin: 0;
+    padding: 0;
+}
+
+.toc-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: var(--mdui-color-on-surface-variant);
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.toc-link:hover {
+    color: var(--mdui-color-primary);
+    background-color: var(--mdui-color-primary-container);
+    border-left-color: var(--mdui-color-primary);
+}
+
+.toc-link.active {
+    color: var(--mdui-color-primary);
+    background-color: var(--mdui-color-primary-container);
+    border-left-color: var(--mdui-color-primary);
+    font-weight: 600;
+}
+
+.toc-level-1 {
+    padding-left: 20px;
+}
+
+.toc-level-2 {
+    padding-left: 40px;
+    font-size: 14px;
+}
+
+.toc-level-3 {
+    padding-left: 60px;
+    font-size: 13px;
+    color: var(--mdui-color-outline);
+}
+
+.toc-level-4 {
+    padding-left: 80px;
+    font-size: 12px;
+    color: var(--mdui-color-outline);
+}
+
+.toc-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    color: var(--mdui-color-on-surface-variant);
+}
+
+.toc-loading mdui-circular-progress {
+    margin-bottom: 12px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .toc-container {
+        position: static;
+        margin-bottom: 16px;
+    }
+    
+    .toc-card {
+        max-height: none;
+    }
+}
+
+/* 滚动条样式 */
+.toc-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.toc-nav::-webkit-scrollbar-track {
+    background: var(--mdui-color-surface-variant);
+}
+
+.toc-nav::-webkit-scrollbar-thumb {
+    background: var(--mdui-color-outline-variant);
+    border-radius: 2px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb:hover {
+    background: var(--mdui-color-outline);
+}
+</style>
+
+<!-- 目录交互脚本 -->
+<script type="module">
+import 'mdui/components/circular-progress.js';
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取元素并隐藏加载状态
+    const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4');
+    const tocNav = document.getElementById('toc-nav');
+    const loadingElement = tocNav.querySelector('.toc-loading');
+    
+    // 隐藏加载状态
+    if (loadingElement) loadingElement.style.display = 'none';
+    
+    // 清除现有内容
+    while (tocNav.firstChild) {
+        tocNav.removeChild(tocNav.firstChild);
+    }
+    
+    if (headings.length === 0) {
+        tocNav.innerHTML = '<div class="toc-empty">本文暂无目录结构</div>';
+        return;
+    }
+    
+    const tocList = document.createElement('ul');
+    tocList.className = 'toc-list';
+    
+    headings.forEach((heading, index) => {
+        // 为标题添加ID（如果还没有）
+        if (!heading.id) {
+            heading.id = `heading-${index}`;
+        }
+        
+        // 获取标题级别
+        const level = parseInt(heading.tagName.charAt(1));
+        
+        // 创建目录项
+        const listItem = document.createElement('li');
+        listItem.className = 'toc-item';
+        
+        const link = document.createElement('a');
+        link.href = `#${heading.id}`;
+        link.className = `toc-link toc-level-${level}`;
+        link.textContent = heading.textContent;
+        
+        // 添加点击事件
+        link.addEventListener('click', function(e) {
+            // 移除旧的活动状态
+            document.querySelectorAll('.toc-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            // 设置新活动状态
+            this.classList.add('active');
+            e.preventDefault();
+            
+            // 平滑滚动到目标位置
+            heading.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // 更新URL哈希（不触发页面跳转）
+            history.replaceState(null, null, `#${heading.id}`);
+        });
+        
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+    });
+    
+    // 替换加载状态为目录列表
+    tocNav.innerHTML = '';
+    tocNav.appendChild(tocList);
+    
+    // 监听滚动，高亮当前可见的标题
+    let currentActiveLink = null;
+    
+    function updateActiveLink() {
+        const scrollPosition = window.scrollY + 100; // 偏移量，提前高亮
+        
+        // 找到当前可见的标题
+        let currentHeading = null;
+        for (let i = headings.length - 1; i >= 0; i--) {
+            if (headings[i].offsetTop <= scrollPosition) {
+                currentHeading = headings[i];
+                break;
+            }
+        }
+        
+        // 更新高亮状态
+        const links = document.querySelectorAll('.toc-link');
+        
+        links.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        if (currentHeading) {
+            const activeLink = document.querySelector(`.toc-link[href="#${currentHeading.id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+                currentActiveLink = activeLink;
+                
+                // 确保活动链接在可视区域内
+                activeLink.scrollIntoView({
+                    behavior: 'auto',
+                    block: 'nearest'
+                });
+            }
+        }
+    }
+    
+    // 初始化和监听滚动
+    updateActiveLink();
+    window.addEventListener('scroll', updateActiveLink);
+    
+    // 监听URL哈希变化
+    window.addEventListener('hashchange', updateActiveLink);
+});
+</script>

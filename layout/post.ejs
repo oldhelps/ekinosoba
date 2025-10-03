@@ -1,1 +1,15 @@
-<%- partial('_partial/article', {post: page, index: false}) %>
+<div class="post-layout">
+
+    
+    <!-- 文章内容 -->
+    <main class="post-main">
+        <article>
+            <!-- 全宽缩略图卡片 -->
+            <%- include('_partial/thumbnail.ejs') %>
+            <div class="post-content">
+                <%- page.content %>
+            </div>
+    </article>
+    </main>
+</div>
+
